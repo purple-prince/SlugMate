@@ -7,12 +7,31 @@
 
 import SwiftUI
 
-struct ctaButton: View {
+struct ctaButton<Destination: View>: View {
+    
+    let text: String
+    @ViewBuilder var destination: Destination
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink(destination: destination) {
+            Text(text)
+                .bold()
+                .foregroundStyle(Color.appBackground)
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .center)
+                .background(Color.appBlack)
+                .clipShape(Capsule())
+                .shadow(radius: 6, x: 0, y: 4)
+                .padding(.horizontal, 4)
+                .padding(.horizontal)
+        }
     }
 }
 
 #Preview {
-    ctaButton()
+    NavigationStack {
+        ctaButton(text: "SS") {
+            Text("ss")
+        }
+    }
 }
